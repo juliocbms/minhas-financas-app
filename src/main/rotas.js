@@ -13,7 +13,7 @@ function Rotas() {
                 <Route path="/cadastro-usuarios" element={<CadastroUsuario />} />
             </Routes>
         </HashRouter>
-    );
+    )
 }
 
 export default Rotas;

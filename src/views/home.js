@@ -1,10 +1,32 @@
 import React from "react"
+import UsuarioService from "../app/service/usuarioService"
 
 class Home extends React.Component{
 
 
 state = {
     saldo: 0
+}
+
+constructor(){
+    super()
+    this.UsuarioService =  new UsuarioService()
+}
+
+componentDidMount(){
+const usuarioLogadoString = localStorage.getItem('_usuario_logado')
+const usuarioLogado = JSON.parse(usuarioLogadoString)
+
+
+this.UsuarioService
+.obterSaldoPorUsuario(usuarioLogado.id)
+.then(response =>{
+    this.setState({
+        saldo: response.data
+    })
+}).catch(error => {
+    console.error(error.response)
+})
 }
 
 

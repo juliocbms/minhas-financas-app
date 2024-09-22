@@ -1,25 +1,31 @@
-import React from 'react';
-import Card from '../components/card';
-import FormGroup from '../components/form-group';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react'
+import Card from '../components/card'
+import FormGroup from '../components/form-group'
+import { useNavigate } from 'react-router-dom'
+import UsuarioService from '../app/service/usuarioService'
 
 class Login extends React.Component {
     state = {
         email: '',
-        senha: ''
+        senha: '',
+        mensagemErro: null
     }
 
+constructor(){
+    super()
+    this.service = new UsuarioService
+}
 
-    entrar = () => {
-        axios
-            .post('http://localhost:8080/api/usuarios/autenticar', {
-                email: this.state.email,
-                senha: this.state.senha
-            }).then( response => {
-                console.log(response)
+    entrar = async () => {
+        this.service.autenticar({
+            email: this.state.email,
+            senha: this.state.senha
+        }).then( response => {
+                localStorage.setItem('_usuario_logado', JSON.stringify(response.data))
+                this.props.navigate('/home')
             }).catch(erro => {
-                console.log(erro.response)
+                console.log('entrou no erro')
+                this.setState({mensagemErro: erro.response.data})
             })
     }
 
@@ -34,6 +40,9 @@ class Login extends React.Component {
                 <div className="col-md-6" style={{ position: 'relative', left: '300px' }}>
                     <div className="bs-docs-section">
                         <Card title="Login">
+                            <div className="row" >
+                                <span>{this.state.mensagemErro}</span>
+                            </div>
                             <div className="row">
                                 <div className="col-lg-12">
                                     <div className="bs-compnent">

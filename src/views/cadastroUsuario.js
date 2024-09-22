@@ -1,7 +1,7 @@
-import React from "react";
-import { useNavigate } from 'react-router-dom';
-import Card from "../components/card";
-import FormGroup from "../components/form-group";
+import React from "react"
+import { useNavigate } from 'react-router-dom'
+import Card from "../components/card"
+import FormGroup from "../components/form-group"
 
 class CadastroUsuario extends React.Component {
 
@@ -18,8 +18,8 @@ class CadastroUsuario extends React.Component {
 
     cancelar = () => {
         // Verifique se o navigate está funcionando e redireciona corretamente
-        console.log("Redirecionando para login...");
-        this.props.navigate('/login'); 
+        console.log("Redirecionando para login...")
+        this.props.navigate('/login')
     }
 
     render() {
@@ -66,14 +66,14 @@ class CadastroUsuario extends React.Component {
                     </div>
                 </div>
             </Card>
-        );
+        )
     }
 }
 
 // Componente wrapper para usar o hook useNavigate
 function CadastroUsuarioWithNavigate(props) {
     const navigate = useNavigate();
-    return <CadastroUsuario {...props} navigate={navigate} />;
+    return <CadastroUsuario {...props} navigate={navigate} />
 }
 
 export default CadastroUsuarioWithNavigate;
