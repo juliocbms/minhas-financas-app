@@ -2,8 +2,10 @@ import React from 'react'
 import Navbar from '../components/navbar'
 import Rotas from './rotas'
 
+import  'toastr/build/toastr.min.js'
 import 'bootswatch/dist/simplex/bootstrap.css'
 import '../custom.css'
+import 'toastr/build/toastr.css'
 
 class App extends React.Component {
   render() {

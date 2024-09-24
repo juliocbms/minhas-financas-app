@@ -1,5 +1,7 @@
 import React from "react"
 import UsuarioService from "../app/service/usuarioService"
+import LocalStorageService from "../app/service/localstorageService"
+
 
 class Home extends React.Component{
 
@@ -14,8 +16,7 @@ constructor(){
 }
 
 componentDidMount(){
-const usuarioLogadoString = localStorage.getItem('_usuario_logado')
-const usuarioLogado = JSON.parse(usuarioLogadoString)
+const usuarioLogado = LocalStorageService.addItem ('_usuario_logado')
 
 
 this.UsuarioService

@@ -3,17 +3,18 @@ import Card from '../components/card'
 import FormGroup from '../components/form-group'
 import { useNavigate } from 'react-router-dom'
 import UsuarioService from '../app/service/usuarioService'
+import LocalStorageService from '../app/service/localstorageService'
+import { mensagemErro } from '../components/toastr'
 
 class Login extends React.Component {
     state = {
         email: '',
-        senha: '',
-        mensagemErro: null
+        senha: ''
     }
 
 constructor(){
     super()
-    this.service = new UsuarioService
+    this.service = new UsuarioService()
 }
 
     entrar = async () => {
@@ -21,11 +22,11 @@ constructor(){
             email: this.state.email,
             senha: this.state.senha
         }).then( response => {
-                localStorage.setItem('_usuario_logado', JSON.stringify(response.data))
+            LocalStorageService.addItem('_usuario_logado',response.data)
+                
                 this.props.navigate('/home')
             }).catch(erro => {
-                console.log('entrou no erro')
-                this.setState({mensagemErro: erro.response.data})
+                mensagemErro(erro.response.data)
             })
     }
 
@@ -40,9 +41,6 @@ constructor(){
                 <div className="col-md-6" style={{ position: 'relative', left: '300px' }}>
                     <div className="bs-docs-section">
                         <Card title="Login">
-                            <div className="row" >
-                                <span>{this.state.mensagemErro}</span>
-                            </div>
                             <div className="row">
                                 <div className="col-lg-12">
                                     <div className="bs-compnent">
