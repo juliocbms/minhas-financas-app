@@ -3,7 +3,7 @@ import Navbar from '../components/navbar'
 import Rotas from './rotas'
 
 import  'toastr/build/toastr.min.js'
-import 'bootswatch/dist/simplex/bootstrap.css'
+import 'bootswatch/dist/darkly/bootstrap.css'
 import '../custom.css'
 import 'toastr/build/toastr.css'
 
